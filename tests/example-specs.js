@@ -24,7 +24,6 @@ var webdriverio = require('webdriverio'),
         logLevel: "silent"
     };
 
-chai.Should();
 chai.should();
 chai.use(chaiAsPromised);
 
@@ -33,9 +32,11 @@ desired.name = 'example with ' + browserKey;
 desired.tags = ['tutorial'];
 
 describe('   mocha spec examples (' + desired.browserName + ')', function() {
+    var client = {},
+        allPassed = true,
+        name = "";
+
     this.timeout(60000);
-    var client = {};
-    var allPassed = true;
 
     after(function(done) {
         done();
@@ -52,28 +53,32 @@ describe('   mocha spec examples (' + desired.browserName + ')', function() {
         allPassed = allPassed && (this.currentTest.state === 'passed')
 
         // update sauce labs job
-        saucelabs.updateJob(client.requestHandler.sessionID, { passed: allPassed }, function() {});
+        saucelabs.updateJob(client.requestHandler.sessionID, { name: name, passed: allPassed }, function() {});
 
         client.end(done);
     });
 
     it("has the correct title", function(done) {
+        name = this.test.fullTitle();
         client
             .url('https://github.com/')
-            .getTitle(function(err, title) {
-                assert.equal(undefined, err);
-                assert.strictEqual(title,'GitHub · Build software better, together.');
-            })
-            .call(done);
+            .getTitle()
+            .should
+            .eventually
+            .be
+            .equal('GitHub · Build software better, together').and.notify(done);
     });
 
-    it("has the correct title - fail", function(done) {
+    it("has the correct title - will fail", function(done) {
+        name = this.test.fullTitle();
         client
             .url('https://github.com/')
-            .getTitle(function(err, title) {
-                assert.equal(undefined, err);
-                assert.strictEqual(title,'GitHub · Build software better, together. - This will fail');
-            })
-            .call(done);
+            .getTitle()
+            .should
+            .eventually
+            .be
+            .equal('GitHub · Build software better, together. ABC')
+            .and.notify(done);
     });
+
 });
