@@ -66,7 +66,7 @@ describe('   mocha spec examples (' + desired.browserName + ')', function() {
             .should
             .eventually
             .be
-            .equal('GitHub · Build software better, together').and.notify(done);
+            .equal('GitHub · Build software better, together.').and.notify(done);
     });
 
     it("has the correct title - will fail", function(done) {
