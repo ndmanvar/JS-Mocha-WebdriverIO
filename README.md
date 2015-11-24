@@ -11,7 +11,7 @@ export SAUCE_ACCESS_KEY=<SAUCE_ACCESS_KEY>
 ## 2/ Install tools
 
 ```
-npm install -g mocha
+npm install -g grunt-cli
 ```
 
 ## 3/ Install local package
@@ -28,20 +28,12 @@ npm install
 - The mocha test suite is in `tutorial-specs.js`
 - The parallel runner is in `Makefile`
 
-## 5/ Run tests
-
-```
-BROWSER=firefox ./node_modules/.bin/parallel-mocha tests/*-specs.js
-BROWSER=internet_explorer ./node_modules/.bin/parallel-mocha tests/*-specs.js
-BROWSER=chrome ./node_modules/.bin/parallel-mocha tests/*-specs.js
-```
-
 Go [here](https://saucelabs.com/tests) to view the tests.
 
-## 6/ Run tests in parallel
+## 5/ Run tests in parallel
 
 ```
-make test_in_parallel
+grunt
 ```
 
 Go [here](https://saucelabs.com/tests) to view the tests.
