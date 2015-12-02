@@ -58,8 +58,8 @@ describe('   mocha spec examples (' + desired.browserName + ')', function() {
         client.end(done);
     });
 
-  it("should get guinea pig page 3", function(done) {
-    name = this.test.fullTitle();
+  it("should get guinea pig page", function(done) {
+  	name = this.test.fullTitle();
     client
       .url("https://saucelabs.com/test/guinea-pig")
       .getTitle()
@@ -71,8 +71,8 @@ describe('   mocha spec examples (' + desired.browserName + ')', function() {
   });
 
 
-  it("should get guinea pig page 4", function(done) {
-    name = this.test.fullTitle();
+  it("should get guinea pig page 2", function(done) {
+  	name = this.test.fullTitle();
     client
       .url("https://saucelabs.com/test/guinea-pig")
       .getTitle()
